@@ -13,6 +13,7 @@ AnyCPU/
 
 # Visual Studio Code
 .vscode/
+.vscode
 .vs
 
 # Rider
