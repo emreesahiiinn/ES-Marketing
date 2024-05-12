@@ -12,14 +12,31 @@ public class WriteRepository<T>(DbContext context) : IWriteRepository<T> where T
     public async Task<bool> AddAsync(T model)
     {
         EntityEntry<T> entityEntry = await Table.AddAsync(model);
-
         return entityEntry.State == EntityState.Added;
     }
 
-    public async Task<bool> AddRangeAsync(List<T> models)
+    public async Task<bool> AddRangeAsync(List<T> datas)
     {
-        await Table.AddRangeAsync(models);
+        await Table.AddRangeAsync(datas);
         return true;
+    }
+
+    public bool Remove(T model)
+    {
+        EntityEntry<T> entityEntry = Table.Remove(model);
+        return entityEntry.State == EntityState.Deleted;
+    }
+
+    public bool RemoveRange(List<T> datas)
+    {
+        Table.RemoveRange(datas);
+        return true;
+    }
+
+    public async Task<bool> RemoveAsync(string id)
+    {
+        T model = await Table.FirstOrDefaultAsync(data => data.Id == Guid.Parse(id));
+        return Remove(model);
     }
 
     public bool Update(T model)
@@ -28,25 +45,6 @@ public class WriteRepository<T>(DbContext context) : IWriteRepository<T> where T
         return entityEntry.State == EntityState.Modified;
     }
 
-    public bool RemoveRange(List<T> models)
-    {
-        Table.AddRange(models);
-        return true;
-    }
-
-    public bool Remove(T model)
-    {
-        EntityEntry<T> entityEntry = Table.Remove(model);
-
-        return entityEntry.State == EntityState.Deleted;
-    }
-
-    public async Task<bool> RemoveAsync(string id)
-    {
-        T model = (await Table.FirstOrDefaultAsync(x => x.Id.ToString() == id))!;
-        return Remove(model);
-    }
-
-    public Task<int> SaveAsync(T model)
-        => context.SaveChangesAsync();
+    public async Task<int> SaveAsync()
+        => await context.SaveChangesAsync();
 }

@@ -16,13 +16,13 @@ public static class ServiceRegistration
     public static void AddPersistenceServices(this IServiceCollection services)
     {
         services.AddDbContext<EsMarketingDbContext>(option =>
-            option.UseNpgsql(Configuration.ConfigurationString), ServiceLifetime.Singleton);
+            option.UseNpgsql(Configuration.ConfigurationString));
 
-        services.AddSingleton<ICustomerReadRepository, CustomerReadRepository>();
-        services.AddSingleton<ICustomerWriteRepository, CustomerWriteRepository>();
-        services.AddSingleton<IOrderReadRepository, OrderReadRepository>();
-        services.AddSingleton<IOrderWriteRepository, OrderWriteRepository>();
-        services.AddSingleton<IProductReadRepository, ProductReadRepository>();
-        services.AddSingleton<IProductWriteRepository, ProductWriteRepository>();
+        services.AddScoped<ICustomerReadRepository, CustomerReadRepository>();
+        services.AddScoped<ICustomerWriteRepository, CustomerWriteRepository>();
+        services.AddScoped<IOrderReadRepository, OrderReadRepository>();
+        services.AddScoped<IOrderWriteRepository, OrderWriteRepository>();
+        services.AddScoped<IProductWriteRepository, ProductWriteRepository>();
+        services.AddScoped<IProductReadRepository, ProductReadRepository>();
     }
 }

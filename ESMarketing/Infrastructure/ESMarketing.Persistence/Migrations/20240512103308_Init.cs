@@ -16,7 +16,8 @@ namespace ESMarketing.Persistence.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    CreatedDate = table.Column<long>(type: "bigint", nullable: false)
+                    CreatedDate = table.Column<long>(type: "bigint", nullable: false),
+                    UpdatedDate = table.Column<long>(type: "bigint", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -30,8 +31,9 @@ namespace ESMarketing.Persistence.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
                     Stock = table.Column<int>(type: "integer", nullable: false),
-                    Price = table.Column<long>(type: "bigint", nullable: false),
-                    CreatedDate = table.Column<long>(type: "bigint", nullable: false)
+                    Price = table.Column<float>(type: "real", nullable: false),
+                    CreatedDate = table.Column<long>(type: "bigint", nullable: false),
+                    UpdatedDate = table.Column<long>(type: "bigint", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -43,10 +45,11 @@ namespace ESMarketing.Persistence.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    CustomerId = table.Column<Guid>(type: "uuid", nullable: false),
                     Decription = table.Column<string>(type: "text", nullable: false),
                     Address = table.Column<string>(type: "text", nullable: false),
-                    CustomerId = table.Column<Guid>(type: "uuid", nullable: false),
-                    CreatedDate = table.Column<long>(type: "bigint", nullable: false)
+                    CreatedDate = table.Column<long>(type: "bigint", nullable: false),
+                    UpdatedDate = table.Column<long>(type: "bigint", nullable: true)
                 },
                 constraints: table =>
                 {

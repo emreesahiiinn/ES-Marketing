@@ -1,10 +1,13 @@
 using ESMarketing.Application.Repositories.Orders;
 using ESMarketing.Domain.Entities;
+using ESMarketing.Persistence.Contexts;
 using ESMarketing.Persistence.Repositories.BaseRepositories;
-using Microsoft.EntityFrameworkCore;
 
 namespace ESMarketing.Persistence.Repositories.Orders;
 
-public class OrderWriteRepository(DbContext context) : WriteRepository<Order>(context), IOrderWriteRepository
+public class OrderWriteRepository : WriteRepository<Order>, IOrderWriteRepository
 {
+    public OrderWriteRepository(EsMarketingDbContext context) : base(context)
+    {
+    }
 }

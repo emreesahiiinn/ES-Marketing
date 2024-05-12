@@ -10,5 +10,5 @@ public interface IWriteRepository<T> : IRepository<T> where T : BaseEntity
     bool RemoveRange(List<T> models);
     bool Remove(T model);
     Task<bool> RemoveAsync(string id);
-    Task<int> SaveAsync(T model);
+    Task<int> SaveAsync();
 }

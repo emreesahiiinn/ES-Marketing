@@ -31,6 +31,9 @@ namespace ESMarketing.Persistence.Migrations
                     b.Property<long>("CreatedDate")
                         .HasColumnType("bigint");
 
+                    b.Property<long?>("UpdatedDate")
+                        .HasColumnType("bigint");
+
                     b.HasKey("Id");
 
                     b.ToTable("Customers");
@@ -56,6 +59,9 @@ namespace ESMarketing.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<long?>("UpdatedDate")
+                        .HasColumnType("bigint");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CustomerId");
@@ -76,11 +82,14 @@ namespace ESMarketing.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<long>("Price")
-                        .HasColumnType("bigint");
+                    b.Property<float>("Price")
+                        .HasColumnType("real");
 
                     b.Property<int>("Stock")
                         .HasColumnType("integer");
+
+                    b.Property<long?>("UpdatedDate")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 

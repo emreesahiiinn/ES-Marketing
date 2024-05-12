@@ -1,8 +1,8 @@
 using ESMarketing.Persistence.DependencyRegistration;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddControllers();
 builder.Services.AddPersistenceServices();
+builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

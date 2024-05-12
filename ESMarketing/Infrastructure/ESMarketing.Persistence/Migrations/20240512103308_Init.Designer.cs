@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace ESMarketing.Persistence.Migrations
 {
     [DbContext(typeof(EsMarketingDbContext))]
-    [Migration("20240503192143_Init")]
+    [Migration("20240512103308_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -32,6 +32,9 @@ namespace ESMarketing.Persistence.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<long>("CreatedDate")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("UpdatedDate")
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
@@ -59,6 +62,9 @@ namespace ESMarketing.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<long?>("UpdatedDate")
+                        .HasColumnType("bigint");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CustomerId");
@@ -79,11 +85,14 @@ namespace ESMarketing.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<long>("Price")
-                        .HasColumnType("bigint");
+                    b.Property<float>("Price")
+                        .HasColumnType("real");
 
                     b.Property<int>("Stock")
                         .HasColumnType("integer");
+
+                    b.Property<long?>("UpdatedDate")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
