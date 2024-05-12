@@ -1,7 +1,8 @@
+using ESMarketing.Application.Features.Queries.GetAllProducts;
 using ESMarketing.Application.Repositories.Products;
-using ESMarketing.Application.RequestParameters;
 using ESMarketing.Application.ViewModels.Products;
 using ESMarketing.Domain.Entities;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ESMarketing.API.Controllers;
@@ -10,22 +11,14 @@ namespace ESMarketing.API.Controllers;
 [ApiController]
 public class ProductController(
     IProductReadRepository productReadRepository,
-    IProductWriteRepository productWriteRepository) : ControllerBase
+    IProductWriteRepository productWriteRepository,
+    IMediator mediator) : ControllerBase
 {
     [HttpGet]
-    public IActionResult Get([FromQuery] Pagination pagination)
+    public async Task<IActionResult> Get([FromQuery] GetAllProductQueryRequest productQueryRequest)
     {
-        var totalCount = productReadRepository.GetAll(false).Count();
-        var product = productReadRepository.GetAll(false).Skip(pagination.Page * pagination.Size).Take(pagination.Size)
-            .Select(x => new
-            {
-                x.Id,
-                x.Name,
-                x.Price,
-                x.Stock,
-                x.CreatedDate
-            }).ToList();
-        return Ok(new { totalCount, product });
+        GetAllProductQueryResponse productQueryResponse= await mediator.Send(productQueryRequest);
+        return Ok(productQueryResponse);
     }
 
     [HttpGet("{id}")]

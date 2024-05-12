@@ -1,3 +1,4 @@
+using ESMarketing.Application.ServiceRegistration;
 using ESMarketing.Application.Validators.Product;
 using ESMarketing.Infrastructure.Concretes.Storage.Local;
 using ESMarketing.Infrastructure.Filters;
@@ -8,6 +9,7 @@ using FluentValidation.AspNetCore;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddPersistenceServices();
 builder.Services.AddPersistenceServices();
+builder.Services.AddApplicationServices();
 
 // Storage Type
 builder.Services.AddStorage<LocalStorage>();
