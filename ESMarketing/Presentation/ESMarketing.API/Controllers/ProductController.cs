@@ -1,4 +1,5 @@
 using ESMarketing.Application.Repositories.Products;
+using ESMarketing.Application.RequestParameters;
 using ESMarketing.Application.ViewModels.Products;
 using ESMarketing.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -12,9 +13,19 @@ public class ProductController(
     IProductWriteRepository productWriteRepository) : ControllerBase
 {
     [HttpGet]
-    public IActionResult Get()
+    public IActionResult Get([FromQuery] Pagination pagination)
     {
-        return Ok(productReadRepository.GetAll(false));
+        var totalCount = productReadRepository.GetAll(false).Count();
+        var product = productReadRepository.GetAll(false).Skip(pagination.Page * pagination.Size).Take(pagination.Size)
+            .Select(x => new
+            {
+                x.Id,
+                x.Name,
+                x.Price,
+                x.Stock,
+                x.CreatedDate
+            }).ToList();
+        return Ok(new { totalCount, product });
     }
 
     [HttpGet("{id}")]

@@ -18,6 +18,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\Core\ESMarketing.Application\ESMarketing.Application.csproj" />
+      <ProjectReference Include="..\..\Infrastructure\ESMarketing.Infrastructure\ESMarketing.Infrastructure.csproj" />
       <ProjectReference Include="..\..\Infrastructure\ESMarketing.Persistence\ESMarketing.Persistence.csproj" />
     </ItemGroup>
 

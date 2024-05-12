@@ -10,6 +10,7 @@
       <ProjectReference Include="..\..\Core\ESMarketing.Application\ESMarketing.Application.csproj" />
     </ItemGroup>
     <ItemGroup>
+        <PackageReference Include="Azure.Storage.Blobs" Version="12.20.0-beta.2" />
         <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0-preview.3.24172.9" />
         <PackageReference Include="Microsoft.Extensions.Options" Version="9.0.0-preview.3.24172.9" />
     </ItemGroup>
